@@ -7,7 +7,7 @@ namespace Spear
     {
         static void Main(string[] args)
         {
-            PPMImageExporter.ExportPPM("sample.ppm",1920,1080);
+            ImageExporter.ExportPPM("sample.ppm",1920,1080);
         }
     }
 }

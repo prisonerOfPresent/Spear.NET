@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Spear.Math;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
 namespace Spear.Utils
 {
-    public class PPMImageExporter
+    public class ImageExporter
     {
         public static void ExportPPM( string fileName, int width, int height ) 
         {
@@ -21,12 +22,10 @@ namespace Spear.Utils
                 {
                     for (int i = 0; i < width; i++) 
                     {
-                        float r = (float)i / (float)width;
-                        float g = (float)j / (float)height;
-                        float b = 0.2f;
-                        int ir = (int)(255.99 * r);
-                        int ig = (int)(255.99 * g);
-                        int ib = (int)(255.99 * b);
+                        var color = new Vector3f( (float)(i/width), (float)(j/height), 0.2f );
+                        int ir = (int)(255.99 * color.R);
+                        int ig = (int)(255.99 * color.G);
+                        int ib = (int)(255.99 * color.B);
                         writer.Write( ir );
                         writer.Write(" ");
                         writer.Write(ig);
