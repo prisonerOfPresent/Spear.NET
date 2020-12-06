@@ -191,8 +191,6 @@ namespace Spear.Math
             return new Vector3f(a.X * k, a.Y * k, a.Z * k);
         }
 
-
-
         // Do we really need the index operator? Let us see.
         public float this[int index] => _components[index];
     }
