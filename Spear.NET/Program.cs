@@ -26,7 +26,7 @@ namespace Spear
 
                     var ray = new Ray( origin, lowerLeftCorner + ( horizontal * u ) + (vertical * v) );
 
-                    var color = Ray.Color(ray);
+                    var color = Ray.LinerBlendBlueToWhite(ray);
 
                     int ir = (int)(255.99 * color.R);
                     int ig = (int)(255.99 * color.G);

@@ -42,17 +42,27 @@ namespace Spear.Core
         /// </summary>
         /// <param name="t"> Length from origin </param>
         /// <returns> Point at which length reaches from origin </returns>
-        public Vector3f PointAtParameter(float t) => Origin + ( Direction * t );
+        public Vector3f PointAtDistance(float distance) => Origin + ( Direction * distance );
 
         /// <summary>
-        /// Just a static helper method
+        /// Just a static helper method to create a liner blend from blue to white
+        ///  A linear blend should always be in form
+        ///  (1 - t) * start value +  (t * end value ).
+        ///  t should always go from 0 to 1.
         /// </summary>
         /// <param name="ray"></param>
-        /// <returns> a color of direction of the ray </returns>
-        public static Vector3f Color( Ray ray ) 
+        /// <returns> returns a light blue blended color with white </returns>
+        public static Vector3f LinerBlendBlueToWhite( Ray ray ) 
         {
             Vector3f unitVectorOfDirection = Vector3f.UnitVector(ray.Direction);
+            // we are taking t as half of Y direction plus 1, so making sure we are always in 
+            // 0 < t < 1 range.
             float t = 0.5f * (unitVectorOfDirection.Y + 1.0f);
+            // returns the linear blended colour vector from above formula
+            // ( ( 1 - t ) * start value ) + ( end value * t )
+            // Start value is a white - 1,1,1
+            // end value is a sort of light blue - 0.5, 0.7, 1 as rgb
+            // and we are blending those together to produce our colour.
             return 
                 ( new Vector3f( 1.0f, 1.0f, 1.0f ) * (1 - t) ) + 
                 ( new Vector3f( 0.5f, 0.7f, 1.0f ) * t );
