@@ -54,6 +54,14 @@ namespace Spear.Core
         /// <returns> returns a light blue blended color with white </returns>
         public static Vector3f LinerBlendBlueToWhite( Ray ray ) 
         {
+            // If it is colliding sphere, return red.
+            // FIXME: change colors to color class, not vector class.
+            float sphereCollisionParameter = Collisions.CollidingSphere(new Vector3f(0, 0, -1), 0.5f, ray);
+            if ( sphereCollisionParameter > 0.0)
+            {
+                Vector3f normal = Vector3f.UnitVector(ray.PointAtDistance(sphereCollisionParameter) - new Vector3f(0f, 0f, -1f));
+                return new Vector3f(normal.X + 1, normal.Y + 1, normal.Z + 1) * 0.5f;
+            }
             Vector3f unitVectorOfDirection = Vector3f.UnitVector(ray.Direction);
             // we are taking t as half of Y direction plus 1, so making sure we are always in 
             // 0 < t < 1 range.
